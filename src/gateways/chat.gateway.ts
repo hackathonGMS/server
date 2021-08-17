@@ -22,7 +22,7 @@ enum SocketDataType {
   ALERT_JOIN = 'alert_join_room',
 }
 
-@WebSocketGateway(80, { namespace: 'chat' })
+@WebSocketGateway(3012, { namespace: 'chat' })
 export class ChatGateWay
   implements OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit
 {
