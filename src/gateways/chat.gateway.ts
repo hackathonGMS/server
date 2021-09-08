@@ -299,6 +299,16 @@ export class ChatGateWay
     return result;
   }
 
+  @SubscribeMessage('emoticonExpression')
+  async getExpression(
+    @MessageBody() data: any,
+    @ConnectedSocket() client: Socket,
+  ) {
+    const [expr, id, room] = data;
+    client.join(room);
+    client.to(room).emit('getEmoticonExpression', { expr, id });
+  }
+
   @SubscribeMessage('sendMessage')
   async sendChat(@MessageBody() data: any, @ConnectedSocket() client: Socket) {
     const [type, msg, room, name, time] = data;

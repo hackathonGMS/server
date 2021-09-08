@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Chat } from 'src/entities/chat/chat.entity';
+import { Room } from 'src/entities/room/room.entity';
 import { ChatGateWay } from './chat.gateway';
 
 @Controller('chat')
@@ -18,6 +19,16 @@ export class ChatController {
   async getRoomData(@Param('roomCode') roomCode: string): Promise<Chat[]> {
     const room = await this.ChatGateWay.getRoom(roomCode);
     return this.ChatGateWay.getChatListWithRoomId(room.getRoomId);
+  }
+  @Get('getRoom/:roomCode')
+  @ApiOperation({
+    summary: '방 번호를 통해서 방 정보를 불러옵니다.',
+  })
+  @ApiResponse({
+    type: '방 번호, 소속, 안건',
+  })
+  async getRoomInfo(@Param('roomCode') roomCode: string): Promise<Room> {
+    return await this.ChatGateWay.getRoom(roomCode);
   }
 
   @Get('randompick/:roomCode')
