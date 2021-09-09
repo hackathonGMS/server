@@ -384,7 +384,7 @@ export class ChatGateWay
     const [title, list, room] = data;
     const result = list[this.randomNumber(list.length)];
     await this.saveRandomPick(list, title, room, result);
-    this.server.to(room).emit('randomPickList', list, title);
+    this.server.to(room).emit('randomPickList', { list, title });
     this.server.to(room).emit('randomPickResult', result);
   }
   afterInit() {
