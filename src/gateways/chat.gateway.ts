@@ -305,8 +305,18 @@ export class ChatGateWay
     @ConnectedSocket() client: Socket,
   ) {
     const [expr, id, room] = data;
-    client.join(room);
+    console.log(data, room);
     client.to(room).emit('getEmoticonExpression', { expr, id });
+  }
+
+  @SubscribeMessage('testJoinRoom')
+  async testJoinRoom(
+    @MessageBody() data: any,
+    @ConnectedSocket() client: Socket,
+  ) {
+    const [room] = data;
+    console.log('join', room);
+    client.join(room);
   }
 
   @SubscribeMessage('sendMessage')
@@ -326,7 +336,7 @@ export class ChatGateWay
     client.to(room).emit('receiveMessage', {
       content: msg,
       name,
-      type: SocketDataType.MSG,
+      type,
       time,
     });
   }
