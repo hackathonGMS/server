@@ -9,4 +9,6 @@ rm -rf ~/log/picnic.log
 rm -rf ~/log/picnic-error.log
 
 cd /home/ec2-user/picnic_server
+rm -rf yarn.lock node_modules
+yarn install
 yarn start:prod >> /home/ec2-user/log/picnic.log 2>> /home/ec2-user/log/picnic-error.log &
