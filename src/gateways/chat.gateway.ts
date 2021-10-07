@@ -307,6 +307,14 @@ export class ChatGateWay
     const [expr, id, room] = data;
     client.to(room).emit('getEmoticonExpression', { expr, id });
   }
+  @SubscribeMessage('stopEmoticon')
+  async stopEmoticon(
+    @MessageBody() data: any,
+    @ConnectedSocket() client: Socket,
+  ) {
+    const [id, room] = data;
+    client.to(room).emit('stopEmoticon', { id });
+  }
 
   @SubscribeMessage('testJoinRoom')
   async testJoinRoom(
@@ -384,6 +392,7 @@ export class ChatGateWay
     const [title, list, room] = data;
     const result = list[this.randomNumber(list.length)];
     await this.saveRandomPick(list, title, room, result);
+
     this.server.to(room).emit('randomPickList', { list, title });
     this.server.to(room).emit('randomPickResult', result);
   }
