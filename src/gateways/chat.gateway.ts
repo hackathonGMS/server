@@ -24,16 +24,6 @@ import { CreateRoomResponseDto } from 'src/room/dto/createRoomResponse.dto';
 import { RoomInfoResponse } from 'src/room/dto/room-info.dto';
 import { Repository } from 'typeorm';
 
-interface RoomInfo {
-  room: string;
-}
-interface ChatData {
-  msg: string;
-  name: string;
-  time: string;
-  room: string;
-}
-
 enum SocketDataType {
   MSG = 'message',
   ALERT_JOIN = 'alert_join_room',
