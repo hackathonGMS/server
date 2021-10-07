@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Chat } from 'src/entities/chat/chat.entity';
 import { Room } from 'src/entities/room/room.entity';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ChatGateWay } from './chat.gateway';
 
 @Controller('chat')
